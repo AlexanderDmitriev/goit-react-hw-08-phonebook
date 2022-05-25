@@ -1,17 +1,19 @@
+import { Route, Routes } from 'react-router-dom';
+import Navigation from './Navigation';
+import StartPage from '../pages/StartPage';
+import ContactsPage from '../pages/ContactsPage';
+
 export const App = () => {
   return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        textTransform: 'uppercase',
-        color: '#010101',
-      }}
-    >
-      React homework template
-    </div>
+    <>
+      <Navigation/>
+      <Routes>
+        <Route path="/" element={<StartPage/>} />
+        <Route path="/contacts" element={<ContactsPage/>} />
+        <Route path="/login" element={<h2>Login/Logout</h2>} />
+        <Route path="/register" element={<h2>Registration</h2>} />
+      </Routes>
+      <h2>NewContactModal</h2>
+    </>
   );
 };
