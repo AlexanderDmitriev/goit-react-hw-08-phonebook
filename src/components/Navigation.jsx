@@ -5,13 +5,20 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
-import LightModeIcon from '@mui/icons-material/LightMode';
+ import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
+import { useTheme} from '@mui/material/styles';
 
 const Navigation = () => {
+  const [mode, setMode] = React.useState('light');
+  const ColorModeContext = React.createContext({ toggleColorMode: () => {setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));} });
+  const theme = useTheme();
+  const colorMode = React.useContext(ColorModeContext);
+
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
+      
         <AppBar position="static">
           <Toolbar>
             <Typography variant="h3" component="h1" sx={{ flexGrow: 1 }}>
@@ -23,15 +30,16 @@ const Navigation = () => {
               Hello, name
             </Typography>
             <Button color="inherit">Logout</Button>
+            {theme.palette.mode} mode
             <IconButton
               size="large"
               edge="start"
               color="inherit"
               aria-label="menu"
               sx={{ mr: 2 }}
+               onClick={colorMode.toggleColorMode}
+               /* {theme.palette.mode === 'light' ? <LightModeIcon /> : <DarkModeIcon />} */ 
             >
-              <LightModeIcon />
-              <DarkModeIcon/>
             </IconButton>
           </Toolbar>
         </AppBar>
