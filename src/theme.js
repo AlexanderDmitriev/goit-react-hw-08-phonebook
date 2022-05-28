@@ -13,13 +13,13 @@ export let theme = createTheme({
   },
 });
 
-theme = createTheme(theme, {
+/*  theme = createTheme(theme, {
   palette: {
     mode: 'light',
     info: {
       main: theme.palette.secondary.main,
     },
   },
-});
+} ); */
 
 
