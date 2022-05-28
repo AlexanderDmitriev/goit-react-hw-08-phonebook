@@ -13,6 +13,18 @@ export let theme = createTheme({
   },
 });
 
+const light = {
+  palette: {
+    mode: "light",
+  },
+};
+
+const dark = {
+  palette: {
+    mode: "dark",
+  },
+};
+
 /*  theme = createTheme(theme, {
   palette: {
     mode: 'light',
