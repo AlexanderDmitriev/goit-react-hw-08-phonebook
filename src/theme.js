@@ -13,15 +13,21 @@ export let theme = createTheme({
   },
 });
 
-const light = {
+export const light = {
   palette: {
     mode: "light",
+    primary: {
+      main: '#FAE03C',
+    },
   },
 };
 
-const dark = {
+export const dark = {
   palette: {
     mode: "dark",
+    primary: {
+      main: '#7700ff',
+    },
   },
 };
 

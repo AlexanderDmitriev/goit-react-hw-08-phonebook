@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -7,17 +7,12 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
-/* import { useTheme } from '@mui/material/styles'; */
 
-const Navigation = () => {
-  const [isDark, setIsDark] = useState(false);
-  //const ColorModeContext = React.createContext({ toggleColorMode: () => {setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));} });
-  //const theme = useTheme();
-  //const colorMode = React.useContext(ColorModeContext);
-
+const Navigation = ({ isDark = false, changeTheme }) => {
+  /*   
   const handleChangeTheme = () => {
     setIsDark(!isDark);
-  };
+  }; */
 
   return (
     <>
@@ -38,7 +33,6 @@ const Navigation = () => {
               Hello, name
             </Typography>
             <Button color="inherit">Logout</Button>
-            {/* {theme.palette.mode} mode */}
             <IconButton
               size="large"
               edge="start"
@@ -46,11 +40,10 @@ const Navigation = () => {
               aria-label="menu"
               sx={{ mr: 2 }}
               onClick={() => {
-                handleChangeTheme();
+                changeTheme();
               }}
-              /* {theme.palette.mode === 'light' ? <LightModeIcon /> : <DarkModeIcon />} */
             >
-              {isDark ? <DarkModeIcon /> : <LightModeIcon />}
+              {isDark ? <LightModeIcon /> : <DarkModeIcon />}
             </IconButton>
           </Toolbar>
         </AppBar>
