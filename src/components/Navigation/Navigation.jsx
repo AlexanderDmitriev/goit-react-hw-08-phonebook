@@ -7,19 +7,31 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
+import { Link } from '@mui/material';
+import { Link as RouterLink } from 'react-router-dom';
 
 const Navigation = ({ isDark = false, changeTheme }) => {
-
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
           <Toolbar>
-            <Typography variant="h3" component="h1" sx={{ flexGrow: 1 }}>
+            <Link
+              component={RouterLink}
+              to="/"
+              color="secondary"
+              variant="h3"
+              underline="none"
+              sx={{ flexGrow: 1 }}
+            >
               My contacts
-            </Typography>
-            <Button color="inherit">Registration</Button>
-            <Button color="inherit">Login</Button>
+            </Link>
+            <Button component={RouterLink} to="/register" color="inherit">
+              Registration
+            </Button>
+            <Button component={RouterLink} to="/login" color="inherit">
+            Login
+            </Button>
             <Typography
               variant="subtitle1"
               component="p"

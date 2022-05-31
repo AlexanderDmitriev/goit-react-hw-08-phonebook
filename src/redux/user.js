@@ -1,11 +1,11 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import axios from 'axios';
-/* import {BASIC_URL} from '../api/basicData'; */
+/* import axios from 'axios'; */
+import {BASIC_URL} from '../api/basicData';
 
 export const usersApi = createApi({
   reducerPath: 'users',
   baseQuery: fetchBaseQuery({
-    baseUrl: axios.defaults.baseURL,
+    baseUrl: BASIC_URL,
   }),
   tagTypes: ['User'],
   endpoints: builder => ({
@@ -22,11 +22,11 @@ export const usersApi = createApi({
       invalidatesTags: ['User'],
     }),
     loginUser: builder.mutation({
-      query: ({ email, password }) => ({
+      query: ({ name, password }) => ({
         url: `/users/login`,
         method: 'POST',
         body: {
-          email: email,
+          name: name,
           password: password,
         },
       }),

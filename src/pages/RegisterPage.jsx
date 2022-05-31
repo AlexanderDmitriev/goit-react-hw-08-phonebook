@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import * as yup from 'yup';
 
-const RegisterPage = ({ onSubmit }) => {
+const RegisterPage = () => {
   const registrationMessage = `Please, fill out the registration form to use the application.`;
 
   const [name, setName] = useState('');
@@ -37,7 +37,7 @@ const RegisterPage = ({ onSubmit }) => {
         sx={{
           '& > :not(style)': { m: 1, width: '25ch' },
         }}
-        noValidate
+        validate={schema}
         onSubmit={handleSubmit}
       >
         <TextField

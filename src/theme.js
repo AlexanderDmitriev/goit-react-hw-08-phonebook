@@ -19,6 +19,9 @@ export const light = {
     primary: {
       main: '#FAE03C',
     },
+    secondary: {
+      main: '#000',
+    },
   },
 };
 
@@ -27,6 +30,9 @@ export const dark = {
     mode: "dark",
     primary: {
       main: '#7700ff',
+    },
+    secondary: {
+      main: '#fff',
     },
   },
 };
