@@ -9,7 +9,7 @@ import { dark, light } from '../theme';
 import { useDispatch } from 'react-redux';
 import { useAddNewUserMutation } from '../redux/user';
 
-const Navigation = lazy(() => import('./Navigation'));
+const Navigation = lazy(() => import('./Navigation/Navigation'));
 const RegisterPage = lazy(() => import('../pages/RegisterPage'));
 
 export const App = () => {

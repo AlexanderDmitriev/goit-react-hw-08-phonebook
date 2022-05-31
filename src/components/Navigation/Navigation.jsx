@@ -9,10 +9,6 @@ import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 
 const Navigation = ({ isDark = false, changeTheme }) => {
-  /*   
-  const handleChangeTheme = () => {
-    setIsDark(!isDark);
-  }; */
 
   return (
     <>
