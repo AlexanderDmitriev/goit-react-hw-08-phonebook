@@ -10,7 +10,10 @@ import DarkModeIcon from '@mui/icons-material/DarkMode';
 import { Link } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 
+
 const Navigation = ({ isDark = false, changeTheme }) => {
+
+
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>

@@ -6,29 +6,31 @@ import TextField from '@mui/material/TextField';
 import { useLoginUserMutation } from '../redux/user';
 
 const LoginPage = () => {
-    const loginMessage=`Please, enter the login information to use the application.`;
-    
-  const [name, setName] = useState('');
+  const loginMessage = `Please, enter the login information to use the application.`;
+
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [logInUser /* isSuccess */] = useLoginUserMutation();
+  const [logInUser, {isSuccess}] = useLoginUserMutation();
 
   const handleSubmit = event => {
     event.preventDefault();
-    logInUser({ name, password });
-    setName('');
+    logInUser({ email, password });
+console.log(isSuccess);
+    setEmail('');
     setPassword('');
+    event.currentTarget.reset();
   };
 
-    //Схема валидации
-    const schema = yup.object().shape({
-      name: yup.string().required(),
-      password: yup.string().required(),
-    });
-    
-    return (
-      <>
-        <h2>{loginMessage}</h2>
-        <Box
+  //Схема валидации
+  const schema = yup.object().shape({
+    name: yup.string().required(),
+    password: yup.string().required(),
+  });
+
+  return (
+    <>
+      <h2>{loginMessage}</h2>
+      <Box
         component="form"
         sx={{
           '& > :not(style)': { m: 1, width: '25ch' },
@@ -37,23 +39,23 @@ const LoginPage = () => {
         onSubmit={handleSubmit}
       >
         <TextField
-          id="name"
-          label="Enter your name"
+          id="email"
+          label="Enter your email"
           variant="standard"
-          onChange={(e) => setName(e.target.value)}
+          onChange={e => setEmail(e.target.value)}
         />
         <TextField
           id="password"
           label="Enter your password"
           variant="standard"
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={e => setPassword(e.target.value)}
         />
         <Button variant="contained" size="medium" type="submit">
           Submit
         </Button>
       </Box>
-      </>
-    );
-  };
-  
-  export default LoginPage;
+    </>
+  );
+};
+
+export default LoginPage;

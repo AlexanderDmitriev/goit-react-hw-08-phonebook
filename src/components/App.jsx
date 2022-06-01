@@ -6,17 +6,20 @@ import ContactsPage from '../pages/ContactsPage';
 import LoginPage from '../pages/LoginPage';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { dark, light } from '../theme';
+import { useSelector } from 'react-redux';
 
 const Navigation = lazy(() => import('./Navigation/Navigation'));
 const RegisterPage = lazy(() => import('../pages/RegisterPage'));
 
 export const App = () => {
+  const loggedIn = useSelector(state => state.isLoggedIn);
   ///Theming
   const [isDarkTheme, setIsDarkTheme] = useState(
     JSON.parse(window.localStorage.getItem('darkTheme')) ?? false
   );
 
   const handleChangeTheme = () => {
+    console.log(loggedIn);
     setIsDarkTheme(!isDarkTheme);
   };
 
@@ -24,7 +27,8 @@ export const App = () => {
     window.localStorage.setItem('darkTheme', JSON.stringify(isDarkTheme));
   }, [isDarkTheme]);
 
-
+  
+  
 
   return (
     <ThemeProvider theme={isDarkTheme ? createTheme(dark) : createTheme(light)}>

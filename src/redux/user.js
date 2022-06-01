@@ -22,11 +22,11 @@ export const usersApi = createApi({
       invalidatesTags: ['User'],
     }),
     loginUser: builder.mutation({
-      query: ({ name, password }) => ({
+      query: ({ email, password }) => ({
         url: `/users/login`,
         method: 'POST',
         body: {
-          name: name,
+          email: email,
           password: password,
         },
       }),
