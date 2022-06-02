@@ -3,13 +3,14 @@ import { useState, useEffect } from 'react';
 import { lazy, Suspense } from 'react';
 import StartPage from '../pages/StartPage';
 import ContactsPage from '../pages/ContactsPage';
-import LoginPage from '../pages/LoginPage';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { dark, light } from '../theme';
 import { useSelector } from 'react-redux';
+import { Toaster } from 'react-hot-toast';
 
 const Navigation = lazy(() => import('./Navigation/Navigation'));
 const RegisterPage = lazy(() => import('../pages/RegisterPage'));
+const LoginPage = lazy(() => import('../pages/LoginPage'));
 
 export const App = () => {
   const loggedIn = useSelector(state => state.isLoggedIn);
@@ -27,9 +28,6 @@ export const App = () => {
     window.localStorage.setItem('darkTheme', JSON.stringify(isDarkTheme));
   }, [isDarkTheme]);
 
-  
-  
-
   return (
     <ThemeProvider theme={isDarkTheme ? createTheme(dark) : createTheme(light)}>
       <Suspense fallback={<div>Loading...</div>}>
@@ -42,6 +40,7 @@ export const App = () => {
         </Routes>
         <h2>NewContactModal</h2>
       </Suspense>
+      <Toaster position="top-right" reverseOrder={false} />
     </ThemeProvider>
   );
 };

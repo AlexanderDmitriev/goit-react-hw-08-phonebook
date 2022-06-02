@@ -3,7 +3,9 @@ import { useAddNewUserMutation } from '../redux/user';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
 import * as yup from 'yup';
+import toast from 'react-hot-toast';
 
 const RegisterPage = () => {
   const registrationMessage = `Please, fill out the registration form to use the application.`;
@@ -11,11 +13,14 @@ const RegisterPage = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [createNewUser /* isSuccess */] = useAddNewUserMutation();
+  const [createNewUser, isSuccess] = useAddNewUserMutation();
 
   const handleSubmit = event => {
     event.preventDefault();
     createNewUser({ name, email, password });
+    if (isSuccess) {
+      toast.success(`The registration procedure was successful`);
+    }
     setName('');
     setEmail('');
     setPassword('');
@@ -30,8 +35,14 @@ const RegisterPage = () => {
 
   return (
     <>
-      <h2>{registrationMessage}</h2>
-
+      <Typography
+        variant="h6"
+        component="h2"
+        color="inherit"
+        sx={{ flexGrow: 1 }}
+      >
+        {registrationMessage}
+      </Typography>
       <Box
         component="form"
         sx={{
@@ -44,26 +55,24 @@ const RegisterPage = () => {
           id="name"
           label="Enter your name"
           variant="standard"
-          onChange={(e) => setName(e.target.value)}
+          onChange={e => setName(e.target.value)}
         />
         <TextField
           id="email"
           label="Enter your email"
           variant="standard"
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={e => setEmail(e.target.value)}
         />
         <TextField
           id="password"
           label="Enter your password"
           variant="standard"
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={e => setPassword(e.target.value)}
         />
         <Button variant="contained" size="medium" type="submit">
           Submit
         </Button>
       </Box>
-
-        
     </>
   );
 };

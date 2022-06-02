@@ -9,10 +9,11 @@ import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import { Link } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 
 const Navigation = ({ isDark = false, changeTheme }) => {
-
+  const loggedIn = useSelector(state => state.isLoggedIn);
 
   return (
     <>
@@ -29,12 +30,18 @@ const Navigation = ({ isDark = false, changeTheme }) => {
             >
               My contacts
             </Link>
-            <Button component={RouterLink} to="/register" color="inherit">
-              Registration
-            </Button>
-            <Button component={RouterLink} to="/login" color="inherit">
-            Login
-            </Button>
+            
+            {!loggedIn && (
+              <>
+                <Button component={RouterLink} to="/register" color="inherit">
+                  Registration
+                </Button>
+                <Button component={RouterLink} to="/login" color="inherit">
+                  Login
+                </Button>
+              </>
+            )}
+
             <Typography
               variant="subtitle1"
               component="p"

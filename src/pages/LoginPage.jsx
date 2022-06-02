@@ -3,19 +3,23 @@ import * as yup from 'yup';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
 import { useLoginUserMutation } from '../redux/user';
+import toast from 'react-hot-toast';
 
 const LoginPage = () => {
   const loginMessage = `Please, enter the login information to use the application.`;
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [logInUser, {isSuccess}] = useLoginUserMutation();
+  const [logInUser, isSuccess] = useLoginUserMutation();
 
   const handleSubmit = event => {
     event.preventDefault();
     logInUser({ email, password });
-console.log(isSuccess);
+    if (isSuccess) {
+      toast.success(`Welcome to the My Contacts application`);
+    }
     setEmail('');
     setPassword('');
     event.currentTarget.reset();
@@ -29,7 +33,14 @@ console.log(isSuccess);
 
   return (
     <>
-      <h2>{loginMessage}</h2>
+      <Typography
+        variant="h6"
+        component="h2"
+        color="inherit"
+        sx={{ flexGrow: 1 }}
+      >
+        {loginMessage}
+      </Typography>
       <Box
         component="form"
         sx={{
