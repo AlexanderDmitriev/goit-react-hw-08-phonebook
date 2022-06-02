@@ -34,7 +34,18 @@ const RegisterPage = () => {
   });
 
   return (
-    <>
+    <Box
+      component="form"
+      color="inherit"
+      sx={{
+        width: '100%',
+        bgcolor: 'background.main',
+        color: 'text.primary',
+        p: 3,
+      }}
+      validate={schema}
+      onSubmit={handleSubmit}
+    >
       <Typography
         variant="h6"
         component="h2"
@@ -43,37 +54,31 @@ const RegisterPage = () => {
       >
         {registrationMessage}
       </Typography>
-      <Box
-        component="form"
-        sx={{
-          '& > :not(style)': { m: 1, width: '25ch' },
-        }}
-        validate={schema}
-        onSubmit={handleSubmit}
-      >
-        <TextField
-          id="name"
-          label="Enter your name"
-          variant="standard"
-          onChange={e => setName(e.target.value)}
-        />
-        <TextField
-          id="email"
-          label="Enter your email"
-          variant="standard"
-          onChange={e => setEmail(e.target.value)}
-        />
-        <TextField
-          id="password"
-          label="Enter your password"
-          variant="standard"
-          onChange={e => setPassword(e.target.value)}
-        />
-        <Button variant="contained" size="medium" type="submit">
-          Submit
-        </Button>
-      </Box>
-    </>
+      <TextField
+        id="name"
+        label="Enter your name"
+        variant="standard"
+        sx={{ m:2}}
+        onChange={e => setName(e.target.value)}
+      />
+      <TextField
+        id="email"
+        label="Enter your email"
+        variant="standard"
+        sx={{ m:2}}
+        onChange={e => setEmail(e.target.value)}
+      />
+      <TextField
+        id="password"
+        label="Enter your password"
+        variant="standard"
+        sx={{ m:2}}
+        onChange={e => setPassword(e.target.value)}
+      />
+      <Button variant="contained" size="medium" type="submit" sx={{ m:2}}>
+        Submit
+      </Button>
+    </Box>
   );
 };
 

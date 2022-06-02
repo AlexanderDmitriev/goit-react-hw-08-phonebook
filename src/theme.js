@@ -22,6 +22,9 @@ export const light = {
     secondary: {
       main: '#000',
     },
+    background: {
+      main: '#fff',
+    },
   },
 };
 
@@ -33,6 +36,9 @@ export const dark = {
     },
     secondary: {
       main: '#fff',
+    },
+    background: {
+      main: '#757575',
     },
   },
 };

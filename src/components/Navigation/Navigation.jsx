@@ -11,9 +11,10 @@ import { Link } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-
 const Navigation = ({ isDark = false, changeTheme }) => {
   const loggedIn = useSelector(state => state.isLoggedIn);
+  const userName = useSelector(state => state.users.name);
+  const startNav=loggedIn?'/contacts':'/';
 
   return (
     <>
@@ -22,7 +23,7 @@ const Navigation = ({ isDark = false, changeTheme }) => {
           <Toolbar>
             <Link
               component={RouterLink}
-              to="/"
+              to={startNav}
               color="secondary"
               variant="h3"
               underline="none"
@@ -30,7 +31,7 @@ const Navigation = ({ isDark = false, changeTheme }) => {
             >
               My contacts
             </Link>
-            
+
             {!loggedIn && (
               <>
                 <Button component={RouterLink} to="/register" color="inherit">
@@ -42,21 +43,26 @@ const Navigation = ({ isDark = false, changeTheme }) => {
               </>
             )}
 
-            <Typography
-              variant="subtitle1"
-              component="p"
-              align="right"
-              sx={{ flexGrow: 1 }}
-            >
-              Hello, name
-            </Typography>
-            <Button color="inherit">Logout</Button>
+            {loggedIn && (
+              <>
+                <Typography
+                  variant="subtitle1"
+                  component="p"
+                  align="right"
+                  sx={{ flexGrow: 1 }}
+                >
+                  Hello, {userName}
+                </Typography>
+                <Button color="inherit">Logout</Button>
+              </>
+            )}
+
             <IconButton
               size="large"
               edge="start"
               color="inherit"
               aria-label="menu"
-              sx={{ mr: 2 }}
+              sx={{ m: 2 }}
               onClick={() => {
                 changeTheme();
               }}
