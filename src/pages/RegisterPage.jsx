@@ -1,26 +1,30 @@
 import { useState } from 'react';
-import { useAddNewUserMutation } from '../redux/user';
+/* import { useAddNewUserMutation } from '../redux/user'; */
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import * as yup from 'yup';
-import toast from 'react-hot-toast';
+/* import toast from 'react-hot-toast'; */
+import { useDispatch } from 'react-redux';
+import authOperations from '../api/authification';
 
 const RegisterPage = () => {
   const registrationMessage = `Please, fill out the registration form to use the application.`;
 
+  const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [createNewUser, isSuccess] = useAddNewUserMutation();
+  /* const [createNewUser, isSuccess] = useAddNewUserMutation(); */
 
   const handleSubmit = event => {
     event.preventDefault();
-    createNewUser({ name, email, password });
-    if (isSuccess) {
+    dispatch(authOperations.addNewUser({ name,email, password }));
+    /* createNewUser({ name, email, password }); */
+   /*  if (isSuccess) {
       toast.success(`The registration procedure was successful`);
-    }
+    } */
     setName('');
     setEmail('');
     setPassword('');

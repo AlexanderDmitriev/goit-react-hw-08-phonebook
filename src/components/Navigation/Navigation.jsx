@@ -13,7 +13,7 @@ import { useSelector } from 'react-redux';
 
 const Navigation = ({ isDark = false, changeTheme }) => {
   const loggedIn = useSelector(state => state.isLoggedIn);
-  const userName = useSelector(state => state.users.name);
+  /* const userName = useSelector(state => state.user.name); */
   const startNav=loggedIn?'/contacts':'/';
 
   return (
@@ -51,7 +51,7 @@ const Navigation = ({ isDark = false, changeTheme }) => {
                   align="right"
                   sx={{ flexGrow: 1 }}
                 >
-                  Hello, {userName}
+                  Hello, {/* {userName} */}
                 </Typography>
                 <Button color="inherit">Logout</Button>
               </>

@@ -4,22 +4,26 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import { useLoginUserMutation } from '../redux/user';
-import toast from 'react-hot-toast';
+/* import { useLoginUserMutation } from '../redux/user'; */
+/* import toast from 'react-hot-toast'; */
+import { useDispatch } from 'react-redux';
+import authOperations from '../api/authification';
 
 const LoginPage = () => {
   const loginMessage = `Please, enter the login information to use the application.`;
 
+  const dispatch = useDispatch();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [logInUser, isSuccess] = useLoginUserMutation();
+  /* const [logInUser, isSuccess] = useLoginUserMutation(); */
 
   const handleSubmit = event => {
     event.preventDefault();
-    logInUser({ email, password });
-    if (isSuccess) {
+    dispatch(authOperations.loginUser({ email, password }));
+    /* logInUser({ email, password }); */
+    /* if (isSuccess) {
       toast.success(`Welcome to the My Contacts application`);
-    }
+    } */
     setEmail('');
     setPassword('');
     event.currentTarget.reset();
