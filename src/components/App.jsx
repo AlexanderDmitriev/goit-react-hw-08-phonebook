@@ -12,6 +12,7 @@ import { PublicRoute } from './PublicRoute';
 const Navigation = lazy(() => import('./Navigation/Navigation'));
 const RegisterPage = lazy(() => import('../pages/RegisterPage'));
 const LoginPage = lazy(() => import('../pages/LoginPage'));
+const NotFoundPage = lazy(() => import('../pages/NotFoundPage'));
 
 export const App = () => {
   const loggedIn = useSelector(state => state.isLoggedIn);
@@ -59,6 +60,7 @@ export const App = () => {
               </PublicRoute>
             }
           />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
         <h2>NewContactModal</h2>
       </Suspense>

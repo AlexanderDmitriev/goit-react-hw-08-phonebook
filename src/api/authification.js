@@ -49,9 +49,19 @@ const logoutUser = createAsyncThunk('authification/logoutUser', async () => {
   }
 });
 
+const getUserInformation = createAsyncThunk('authification/getUserInformation', async () => {
+    try {
+      await axios.get('/users/current', token);
+      token.set(token);
+    } catch (error) {
+      toast.error(`Something wrong. We have no user data.`);
+    }
+  });
+
 const authOperations = {
   addNewUser,
   loginUser,
   logoutUser,
+  getUserInformation
 };
 export default authOperations;
