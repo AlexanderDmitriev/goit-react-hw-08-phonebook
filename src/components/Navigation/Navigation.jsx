@@ -10,11 +10,16 @@ import DarkModeIcon from '@mui/icons-material/DarkMode';
 import { Link } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import authOperations from '../../api/authification';
 
 const Navigation = ({ isDark = false, changeTheme }) => {
+  const dispatch = useDispatch();
   const loggedIn = useSelector(state => state.isLoggedIn);
   /* const userName = useSelector(state => state.user.name); */
   const startNav=loggedIn?'/contacts':'/';
+
+  const handleLogout = () => {dispatch(authOperations.logoutUser())};
 
   return (
     <>
@@ -53,7 +58,7 @@ const Navigation = ({ isDark = false, changeTheme }) => {
                 >
                   Hello, {/* {userName} */}
                 </Typography>
-                <Button color="inherit">Logout</Button>
+                <Button color="inherit" onClick={handleLogout}>Logout</Button>
               </>
             )}
 

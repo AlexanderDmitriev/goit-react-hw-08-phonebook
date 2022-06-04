@@ -7,6 +7,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { dark, light } from '../theme';
 import { useSelector } from 'react-redux';
 import { Toaster } from 'react-hot-toast';
+import { PublicRoute } from './PublicRoute';
 
 const Navigation = lazy(() => import('./Navigation/Navigation'));
 const RegisterPage = lazy(() => import('../pages/RegisterPage'));
@@ -31,12 +32,33 @@ export const App = () => {
   return (
     <ThemeProvider theme={isDarkTheme ? createTheme(dark) : createTheme(light)}>
       <Suspense fallback={<div>Loading...</div>}>
-        <Navigation isDark={isDarkTheme} changeTheme={handleChangeTheme}/>
+        <Navigation isDark={isDarkTheme} changeTheme={handleChangeTheme} />
         <Routes>
-          <Route path="/" element={<StartPage />} />
+          <Route
+            path="/"
+            element={
+              <PublicRoute>
+                <StartPage />
+              </PublicRoute>
+            }
+          />
           <Route path="/contacts" element={<ContactsPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
+          <Route
+            path="/login"
+            element={
+              <PublicRoute restricted>
+                <LoginPage />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="/register"
+            element={
+              <PublicRoute restricted>
+                <RegisterPage />
+              </PublicRoute>
+            }
+          />
         </Routes>
         <h2>NewContactModal</h2>
       </Suspense>
