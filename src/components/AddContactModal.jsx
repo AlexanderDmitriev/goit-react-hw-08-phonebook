@@ -25,7 +25,21 @@ const AddContactModal = ({ onClose }) => {
     }
   };
 
-  return createPortal(<div onClick={handleBackDrop}>modal</div>, modalRoot);
+  return createPortal(
+    <div onClick={handleBackDrop}>
+      <label>
+        Name
+        <input type="text" name="name" />
+      </label>
+      <label>
+        Number
+        <input type="text" name="number" />
+      </label>
+      <button type="submit">Submit</button>
+      <button type="button">Cancel</button>
+    </div>,
+    modalRoot
+  );
 };
 
 export default AddContactModal;
