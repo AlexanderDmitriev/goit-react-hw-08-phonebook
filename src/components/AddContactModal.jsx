@@ -4,7 +4,7 @@ import { createPortal } from 'react-dom';
 //Делаем портал для рендера модалки
 const modalRoot = document.querySelector('#modal-root');
 
-const Modal = ({ onClose }) => {
+const AddContactModal = ({ onClose }) => {
   const handleEsc = event => {
     if (event.code === 'Escape') {
       onClose();
@@ -25,7 +25,7 @@ const Modal = ({ onClose }) => {
     }
   };
 
-  return createPortal(<div onClick={handleBackDrop}></div>, modalRoot);
+  return createPortal(<div onClick={handleBackDrop}>modal</div>, modalRoot);
 };
 
-export default Modal;
+export default AddContactModal;
