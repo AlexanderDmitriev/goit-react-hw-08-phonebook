@@ -4,8 +4,10 @@ import Box from '@mui/material/Box';
 /* import { useSelector } from 'react-redux'; */
 import { useState } from 'react';
 import { ContactsPageItems } from '../components/ContactsPageItem';
-import AddContactModal from '../components/AddContactModal';
+import AddContactModal from '../components/Modal/AddContactModal';
 import { FilterContainer } from '../components/FilterContainer';
+import Button from '@mui/material/Button';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
 const ContactsPage = () => {
   /*  const loggedIn = useSelector(state => state.isLoggedIn); */
@@ -14,6 +16,7 @@ const ContactsPage = () => {
 
   const toggleModal = () => {
     setShowModal(!showModal);
+    console.log(filter);
   };
 
   const example = [
@@ -22,10 +25,21 @@ const ContactsPage = () => {
   ];
 
   return (
-    <>
-      <button type="button" onClick={toggleModal}>
-        addNewContact button-open modal
-      </button>
+    <Box
+        sx={{
+          width: '100%',
+          bgcolor: 'background.main',
+          color: 'text.primary',
+          p:3
+        }}
+      >
+      <Button
+        variant="contained"
+        endIcon={<AddCircleOutlineIcon />}
+        onClick={toggleModal}
+      >
+        Add new contact
+      </Button>
       <Box
         sx={{
           width: '100%',
@@ -49,7 +63,7 @@ const ContactsPage = () => {
             id="filter"
             variant="outlined"
             size="small"
-            sx={{ml:3}}
+            sx={{ ml: 3 }}
             onChange={e => setFilter(e.target.value)}
           />
         </FilterContainer>
@@ -67,7 +81,7 @@ const ContactsPage = () => {
       )}
       <ContactsPageItems data={example} />
       {showModal && <AddContactModal onClose={toggleModal} />}
-    </>
+    </Box>
   );
 };
 

@@ -1,6 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { phoneBookApi } from './contacts';
-/* import { usersApi } from './user'; */
 import { filterSlice } from './filter';
 import { authSlice,persistedToken } from './authSlice';
 import {
@@ -16,7 +15,6 @@ import {
 export const store = configureStore({
   reducer: {
     [phoneBookApi.reducerPath]: phoneBookApi.reducer,
-    /* [usersApi.reducerPath]: usersApi.reducer,  */
     [authSlice.name]:persistedToken,
     [filterSlice.name]: filterSlice.reducer,
   },
@@ -27,7 +25,6 @@ export const store = configureStore({
       },
     }),
     phoneBookApi.middleware,
-    /* usersApi.middleware, */
   ],
 });
 

@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
+import { Overlay, Modal } from './ModalStyled';
 
 //Делаем портал для рендера модалки
 const modalRoot = document.querySelector('#modal-root');
@@ -26,18 +27,20 @@ const AddContactModal = ({ onClose }) => {
   };
 
   return createPortal(
-    <div onClick={handleBackDrop}>
-      <label>
-        Name
-        <input type="text" name="name" />
-      </label>
-      <label>
-        Number
-        <input type="text" name="number" />
-      </label>
-      <button type="submit">Submit</button>
-      <button type="button">Cancel</button>
-    </div>,
+    <Overlay onClick={handleBackDrop}>
+      <Modal>
+        <label>
+          Name
+          <input type="text" name="name" />
+        </label>
+        <label>
+          Number
+          <input type="text" name="number" />
+        </label>
+        <button type="submit">Submit</button>
+        <button type="button" onClick={onClose}>Cancel</button>
+      </Modal>
+    </Overlay>,
     modalRoot
   );
 };
