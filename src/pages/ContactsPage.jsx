@@ -1,13 +1,27 @@
 import Typography from '@mui/material/Typography';
 import { useSelector } from 'react-redux';
-import { ContactsPageItem } from '../components/ContactsPageItem';
+import { useState } from 'react';
+import { ContactsPageItems } from '../components/ContactsPageItem';
+import AddContactModal from '../components/AddContactModal';
 
 const ContactsPage = () => {
   const loggedIn = useSelector(state => state.isLoggedIn);
+  const [showModal, setShowModal] = useState(false);
+
+  const toggleModal = () => {
+    setShowModal(!showModal);
+  };
+
+  const example = [
+    { name: 'user1', number: 'number1' },
+    { name: 'user2', number: 'number2' },
+  ];
 
   return (
     <>
-      <button type="button">addNewContact button-open modal</button>
+      <button type="button" onClick={toggleModal}>
+        addNewContact button-open modal
+      </button>
       <Typography
         variant="h6"
         component="h2"
@@ -30,7 +44,8 @@ const ContactsPage = () => {
           You have no contacts yet
         </Typography>
       )}
-      <ContactsPageItem />
+      <ContactsPageItems data={example} />
+      {showModal && <AddContactModal onClose={toggleModal} />}
     </>
   );
 };

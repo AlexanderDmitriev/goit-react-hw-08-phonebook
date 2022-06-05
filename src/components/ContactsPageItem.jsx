@@ -6,7 +6,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
 
-export const ContactsPageItem = () => {
+export const ContactsPageItems = ({ data }) => {
   return (
     <>
       <Typography
@@ -27,11 +27,13 @@ export const ContactsPageItem = () => {
         <Divider />
         <nav aria-label="secondary mailbox folders">
           <List>
-            <ListItem disablePadding>
-              <ListItemText primary="Name-Number" />
-              <button type="button">Patch button</button>
-              <button type="button">Delete button</button>
-            </ListItem>
+            {data.map(contactItem => (
+              <ListItem disablePadding>
+                <ListItemText primary={`${contactItem.name} - ${contactItem.number}`} />
+                <button type="button">Patch button</button>
+                <button type="button">Delete button</button>
+              </ListItem>
+            ))}
           </List>
         </nav>
       </Box>

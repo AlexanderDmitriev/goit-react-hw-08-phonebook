@@ -8,7 +8,6 @@ import { dark, light } from '../theme';
 import { useSelector } from 'react-redux';
 import { Toaster } from 'react-hot-toast';
 import { PublicRoute } from './PublicRoute';
-import AddContactModal from './AddContactModal';
 
 const Navigation = lazy(() => import('./Navigation/Navigation'));
 const RegisterPage = lazy(() => import('../pages/RegisterPage'));
@@ -63,7 +62,6 @@ export const App = () => {
           />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
-        <AddContactModal/>
       </Suspense>
       <Toaster position="top-right" reverseOrder={false} />
     </ThemeProvider>
