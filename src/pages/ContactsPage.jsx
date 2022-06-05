@@ -1,5 +1,6 @@
 import Typography from '@mui/material/Typography';
 import { useSelector } from 'react-redux';
+import { ContactsPageItem } from '../components/ContactsPageItem';
 
 const ContactsPage = () => {
   const loggedIn = useSelector(state => state.isLoggedIn);
@@ -29,25 +30,7 @@ const ContactsPage = () => {
           You have no contacts yet
         </Typography>
       )}
-
-      <p>Contact list</p>
-      <ul>
-        <li>
-          <p>Name-Number</p>
-          <button type="button">Patch button</button>
-          <button type="button">Delete button</button>
-        </li>
-        <li>
-          <p>Name-Number</p>
-          <button type="button">Patch button</button>
-          <button type="button">Delete button</button>
-        </li>
-        <li>
-          <p>Name-Number</p>
-          <button type="button">Patch button</button>
-          <button type="button">Delete button</button>
-        </li>
-      </ul>
+      <ContactsPageItem />
     </>
   );
 };
