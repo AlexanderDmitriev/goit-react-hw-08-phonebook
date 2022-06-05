@@ -17,10 +17,6 @@ const LoginPage = () => {
   const handleSubmit = event => {
     event.preventDefault();
     dispatch(authOperations.loginUser({ email, password }));
-    /* logInUser({ email, password }); */
-    /* if (isSuccess) {
-      toast.success(`Welcome to the My Contacts application`);
-    } */
     setEmail('');
     setPassword('');
     event.currentTarget.reset();

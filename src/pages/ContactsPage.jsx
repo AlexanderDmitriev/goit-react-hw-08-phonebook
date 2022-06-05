@@ -1,12 +1,16 @@
 import Typography from '@mui/material/Typography';
-import { useSelector } from 'react-redux';
+import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
+/* import { useSelector } from 'react-redux'; */
 import { useState } from 'react';
 import { ContactsPageItems } from '../components/ContactsPageItem';
 import AddContactModal from '../components/AddContactModal';
+import { FilterContainer } from '../components/FilterContainer';
 
 const ContactsPage = () => {
-  const loggedIn = useSelector(state => state.isLoggedIn);
+  /*  const loggedIn = useSelector(state => state.isLoggedIn); */
   const [showModal, setShowModal] = useState(false);
+  const [filter, setFilter] = useState('');
 
   const toggleModal = () => {
     setShowModal(!showModal);
@@ -22,19 +26,36 @@ const ContactsPage = () => {
       <button type="button" onClick={toggleModal}>
         addNewContact button-open modal
       </button>
-      <Typography
-        variant="h6"
-        component="h2"
-        color="inherit"
-        sx={{ flexGrow: 1 }}
+      <Box
+        sx={{
+          width: '100%',
+          bgcolor: 'background.main',
+          color: 'text.primary',
+          display: 'flex',
+          justifyContent: 'flex-start',
+          flexDirection: 'row',
+        }}
       >
-        Filter
-      </Typography>
-      <label>
-        Filter input
-        <input type="text" name="filter" />
-      </label>
-      {!loggedIn && (
+        <FilterContainer>
+          <Typography
+            variant="h6"
+            component="h2"
+            color="inherit"
+            sx={{ flexGrow: 1 }}
+          >
+            Filter
+          </Typography>
+          <TextField
+            id="filter"
+            variant="outlined"
+            size="small"
+            sx={{ml:3}}
+            onChange={e => setFilter(e.target.value)}
+          />
+        </FilterContainer>
+      </Box>
+
+      {!example && (
         <Typography
           variant="h6"
           component="h2"

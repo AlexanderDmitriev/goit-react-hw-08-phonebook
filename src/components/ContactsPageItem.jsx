@@ -25,7 +25,7 @@ export const ContactsPageItems = ({ data }) => {
         }}
       >
         <Divider />
-        <nav aria-label="secondary mailbox folders">
+        
           <List>
             {data.map(contactItem => (
               <ListItem disablePadding>
@@ -35,7 +35,7 @@ export const ContactsPageItems = ({ data }) => {
               </ListItem>
             ))}
           </List>
-        </nav>
+      
       </Box>
     </>
   );
