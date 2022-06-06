@@ -1,20 +1,26 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import axios from 'axios';
 
 export const phoneBookApi = createApi({
   reducerPath: 'phoneBook',
   baseQuery: fetchBaseQuery({
-    baseUrl: axios.defaults.baseURL,
+    baseUrl: 'https://connections-api.herokuapp.com',
   }),
+  prepareHeaders: (headers, { getState }) => {
+    const token = getState().authification.token
+
+    // If we have a token set in state, let's assume that we should be passing it.
+    if (token) {
+      headers.set('authorization', `Bearer ${token}`)
+    }
+
+    return headers
+  },
   tagTypes: ['Contacts'],
   endpoints: builder => ({
     getAllContacts: builder.query({
-      query: token => ({
+      query: () => ({
         url: `/contacts`,
-        method: 'GET',
-        body: {
-          token: token,
-        },
+        method: 'GET'
       }),
       providesTags: ['Contacts'],
     }),

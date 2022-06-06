@@ -10,12 +10,15 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { useState } from 'react';
 import EditContactModal from '../components/Modal/EditContactModal';
 
+
 export const ContactsPageItems = ({ data }) => {
   const [showEditModal, setShowEditModal] = useState(false);
 
   const toggleEditModal = () => {
     setShowEditModal(!showEditModal);
   };
+
+  
 
   return (
     <>
