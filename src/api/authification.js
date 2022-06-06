@@ -55,7 +55,7 @@ const getUserInformation = createAsyncThunk(
   async (_, thunkAPI) => {
     const currentToken = thunkAPI.getState().authification.token;
     if (currentToken === null) {
-      return;
+      return thunkAPI.rejectWithValue() ;
     }
     token.set(currentToken);
     try {

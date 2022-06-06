@@ -5,9 +5,9 @@ export const PublicRoute = ({
   children,
   restricted = false
 }) => {
-  const loggedIn = useSelector(state => state.isLoggedIn);
+  const loggedIn = useSelector(state => state.authification.isLoggedIn);
   const willRedirected = loggedIn && restricted;
-      if(willRedirected){return <Navigate to="/" />}
+      if(willRedirected){return <Navigate to="/contacts" />}
       else return children;
 
 };

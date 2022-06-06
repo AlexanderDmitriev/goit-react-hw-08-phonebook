@@ -1,19 +1,20 @@
 import { Route, Routes } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { lazy, Suspense } from 'react';
-import StartPage from '../pages/StartPage';
-import ContactsPage from '../pages/ContactsPage';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { dark, light } from '../theme';
 import { useSelector } from 'react-redux';
 import { Toaster } from 'react-hot-toast';
 import { PublicRoute } from './PublicRoute';
+import { PrivateRoute } from './PrivateRoute';
 import { useDispatch } from 'react-redux';
 import authOperations from '../api/authification';
 
 const Navigation = lazy(() => import('./Navigation/Navigation'));
+const StartPage = lazy(() => import('../pages/StartPage'));
 const RegisterPage = lazy(() => import('../pages/RegisterPage'));
 const LoginPage = lazy(() => import('../pages/LoginPage'));
+const ContactsPage = lazy(() => import('../pages/ContactsPage'));
 const NotFoundPage = lazy(() => import('../pages/NotFoundPage'));
 
 export const App = () => {
@@ -50,7 +51,14 @@ export const App = () => {
               </PublicRoute>
             }
           />
-          <Route path="/contacts" element={<ContactsPage />} />
+          <Route
+            path="/contacts"
+            element={
+              <PrivateRoute>
+                <ContactsPage />
+              </PrivateRoute>
+            }
+          />
           <Route
             path="/login"
             element={
