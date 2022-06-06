@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkreact_homework_template=self.webpackChunkreact_homework_template||[]).push([[675],{9675:function(e,t,a){a.r(t);var o=a(184);t.default=function(){return(0,o.jsx)(o.Fragment,{children:(0,o.jsx)("h2",{children:"Welcome to the My Contacts application. We offer you an application that stores your contacts on a server storage. Give me some money, please, or my bot will call you back on Sunday at 6 am."})})}}}]);
+//# sourceMappingURL=675.41c5117a.chunk.js.map
