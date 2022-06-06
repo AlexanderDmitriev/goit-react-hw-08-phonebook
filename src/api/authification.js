@@ -2,6 +2,7 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
+axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
 const token = {
   set(token) {
     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
@@ -49,19 +50,27 @@ const logoutUser = createAsyncThunk('authification/logoutUser', async () => {
   }
 });
 
-const getUserInformation = createAsyncThunk('authification/getUserInformation', async () => {
+const getUserInformation = createAsyncThunk(
+  'authification/getUserInformation',
+  async (_, thunkAPI) => {
+    const currentToken = thunkAPI.getState().authification.token;
+    if (currentToken === null) {
+      return;
+    }
+    token.set(currentToken);
     try {
-      await axios.get('/users/current', token);
-      token.set(token);
+      const { data } = await axios.get('/users/current');
+      return data;
     } catch (error) {
       toast.error(`Something wrong. We have no user data.`);
     }
-  });
+  }
+);
 
 const authOperations = {
   addNewUser,
   loginUser,
   logoutUser,
-  getUserInformation
+  getUserInformation,
 };
 export default authOperations;

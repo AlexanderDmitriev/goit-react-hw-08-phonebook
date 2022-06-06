@@ -32,7 +32,8 @@ export const authSlice = createSlice({
       state.isLoggedIn=false;
     }, 
     [authOperations.getUserInformation.fulfilled](state, action) {
-      state.user = action.payload.user;
+      state.user = action.payload;
+      state.isLoggedIn=true;
     },
   },
 });

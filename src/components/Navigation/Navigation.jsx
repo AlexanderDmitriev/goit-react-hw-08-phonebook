@@ -15,8 +15,8 @@ import authOperations from '../../api/authification';
 
 const Navigation = ({ isDark = false, changeTheme }) => {
   const dispatch = useDispatch();
-  const loggedIn = useSelector(state => state.isLoggedIn);
-  /* const userName = useSelector(state => state.user.name); */
+  const loggedIn = useSelector(state => state.authification.isLoggedIn);
+  const userName = useSelector(state => state.authification.user.name);
   const startNav=loggedIn?'/contacts':'/';
 
   const handleLogout = () => {dispatch(authOperations.logoutUser())};
@@ -56,7 +56,7 @@ const Navigation = ({ isDark = false, changeTheme }) => {
                   align="right"
                   sx={{ flexGrow: 1 }}
                 >
-                  Hello, {/* {userName} */}
+                  Hello, {userName}
                 </Typography>
                 <Button color="inherit" onClick={handleLogout}>Logout</Button>
               </>

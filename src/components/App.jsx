@@ -8,6 +8,8 @@ import { dark, light } from '../theme';
 import { useSelector } from 'react-redux';
 import { Toaster } from 'react-hot-toast';
 import { PublicRoute } from './PublicRoute';
+import { useDispatch } from 'react-redux';
+import authOperations from '../api/authification';
 
 const Navigation = lazy(() => import('./Navigation/Navigation'));
 const RegisterPage = lazy(() => import('../pages/RegisterPage'));
@@ -15,11 +17,16 @@ const LoginPage = lazy(() => import('../pages/LoginPage'));
 const NotFoundPage = lazy(() => import('../pages/NotFoundPage'));
 
 export const App = () => {
-  const loggedIn = useSelector(state => state.isLoggedIn);
+  const dispatch = useDispatch();
+  const loggedIn = useSelector(state => state.authification.isLoggedIn);
   ///Theming
   const [isDarkTheme, setIsDarkTheme] = useState(
     JSON.parse(window.localStorage.getItem('darkTheme')) ?? false
   );
+
+  useEffect(() => {
+    dispatch(authOperations.getUserInformation());
+  }, [dispatch]);
 
   const handleChangeTheme = () => {
     console.log(loggedIn);
