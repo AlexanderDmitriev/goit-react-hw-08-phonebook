@@ -1,42 +1,57 @@
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
-/* import { useSelector } from 'react-redux'; */
+import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import { ContactsPageItems } from '../components/ContactsPageItem';
 import AddContactModal from '../components/Modal/AddContactModal';
 import { FilterContainer } from '../components/FilterContainer';
 import Button from '@mui/material/Button';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import { filterContacts } from '../redux/filter';
 
 const ContactsPage = () => {
+  const dispatch = useDispatch();
   /*  const loggedIn = useSelector(state => state.isLoggedIn); */
-  const [showModal, setShowModal] = useState(false);
-  const [filter, setFilter] = useState('');
+  const [showAddingModal, setShowAddingModal] = useState(false);
 
-  const toggleModal = () => {
-    setShowModal(!showModal);
-    console.log(filter);
-  };
+  const filterContact = useSelector(state => state.filter.value);
+  /*  const [filter, setFilter] = useState(''); */
 
-  const example = [
+  const contacts = [
     { name: 'user1', number: 'number1' },
     { name: 'user2', number: 'number2' },
   ];
 
+  const changeFilter = event => {
+    dispatch(filterContacts(event.currentTarget.value));
+  };
+
+  let visibleContacts = [];
+  const normalizedFilter = filterContact.toLowerCase();
+  if (contacts) {
+    visibleContacts = contacts.filter(data =>
+      data.name.toLowerCase().includes(normalizedFilter)
+    );
+  }
+
+  const toggleAddingModal = () => {
+    setShowAddingModal(!showAddingModal);
+  };
+
   return (
     <Box
-        sx={{
-          width: '100%',
-          bgcolor: 'background.main',
-          color: 'text.primary',
-          p:3
-        }}
-      >
+      sx={{
+        width: '100%',
+        bgcolor: 'background.main',
+        color: 'text.primary',
+        p: 3,
+      }}
+    >
       <Button
         variant="contained"
         endIcon={<AddCircleOutlineIcon />}
-        onClick={toggleModal}
+        onClick={toggleAddingModal}
       >
         Add new contact
       </Button>
@@ -64,12 +79,12 @@ const ContactsPage = () => {
             variant="outlined"
             size="small"
             sx={{ ml: 3 }}
-            onChange={e => setFilter(e.target.value)}
+            onChange={changeFilter}
           />
         </FilterContainer>
       </Box>
 
-      {!example && (
+      {!contacts && (
         <Typography
           variant="h6"
           component="h2"
@@ -79,8 +94,8 @@ const ContactsPage = () => {
           You have no contacts yet
         </Typography>
       )}
-      <ContactsPageItems data={example} />
-      {showModal && <AddContactModal onClose={toggleModal} />}
+      <ContactsPageItems data={visibleContacts} />
+      {showAddingModal && <AddContactModal onClose={toggleAddingModal} />}
     </Box>
   );
 };

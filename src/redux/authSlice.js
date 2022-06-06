@@ -10,6 +10,7 @@ const initialState = {
   },
   token: null,
   isLoggedIn: false,
+  isFetchingUser: false,
 };
 
 export const authSlice = createSlice({
@@ -31,9 +32,16 @@ export const authSlice = createSlice({
       state.token = null;
       state.isLoggedIn=false;
     }, 
+    [authOperations.getUserInformation.pending](state) {
+      state.isFetchingUser = true;
+    },
     [authOperations.getUserInformation.fulfilled](state, action) {
       state.user = action.payload;
       state.isLoggedIn=true;
+      state.isFetchingUser = false;
+    },
+    [authOperations.getUserInformation.rejected](state) {
+      state.isFetchingUser = false;
     },
   },
 });

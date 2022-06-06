@@ -7,8 +7,16 @@ import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { useState } from 'react';
+import EditContactModal from '../components/Modal/EditContactModal';
 
 export const ContactsPageItems = ({ data }) => {
+  const [showEditModal, setShowEditModal] = useState(false);
+
+  const toggleEditModal = () => {
+    setShowEditModal(!showEditModal);
+  };
+
   return (
     <>
       <Typography
@@ -33,19 +41,29 @@ export const ContactsPageItems = ({ data }) => {
 
         <List>
           {data.map(contactItem => (
-            <ListItem disablePadding sx={{m:1}}>
+            <ListItem disablePadding sx={{ m: 1 }}>
               <ListItemText
                 primary={`${contactItem.name} - ${contactItem.number}`}
               />
-              <Button variant="contained" endIcon={<EditIcon />} sx={{ml:1}}>
+              <Button
+                variant="contained"
+                endIcon={<EditIcon />}
+                sx={{ ml: 1 }}
+                onClick={toggleEditModal}
+              >
                 Edit contact
               </Button>
-              <Button variant="contained" endIcon={<DeleteIcon />} sx={{ml:1}}>
+              <Button
+                variant="contained"
+                endIcon={<DeleteIcon />}
+                sx={{ ml: 1 }}
+              >
                 Delete contact
               </Button>
             </ListItem>
           ))}
         </List>
+        {showEditModal && <EditContactModal onClose={toggleEditModal} />}
       </Box>
     </>
   );

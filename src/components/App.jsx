@@ -20,6 +20,9 @@ const NotFoundPage = lazy(() => import('../pages/NotFoundPage'));
 export const App = () => {
   const dispatch = useDispatch();
   const loggedIn = useSelector(state => state.authification.isLoggedIn);
+  const isFetchingUser = useSelector(
+    state => state.authification.isFetchingUser
+  );
   ///Theming
   const [isDarkTheme, setIsDarkTheme] = useState(
     JSON.parse(window.localStorage.getItem('darkTheme')) ?? false
@@ -42,41 +45,43 @@ export const App = () => {
     <ThemeProvider theme={isDarkTheme ? createTheme(dark) : createTheme(light)}>
       <Suspense fallback={<div>Loading...</div>}>
         <Navigation isDark={isDarkTheme} changeTheme={handleChangeTheme} />
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <PublicRoute>
-                <StartPage />
-              </PublicRoute>
-            }
-          />
-          <Route
-            path="/contacts"
-            element={
-              <PrivateRoute>
-                <ContactsPage />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/login"
-            element={
-              <PublicRoute restricted>
-                <LoginPage />
-              </PublicRoute>
-            }
-          />
-          <Route
-            path="/register"
-            element={
-              <PublicRoute restricted>
-                <RegisterPage />
-              </PublicRoute>
-            }
-          />
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
+        {!isFetchingUser && (
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <PublicRoute>
+                  <StartPage />
+                </PublicRoute>
+              }
+            />
+            <Route
+              path="/contacts"
+              element={
+                <PrivateRoute>
+                  <ContactsPage />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/login"
+              element={
+                <PublicRoute restricted>
+                  <LoginPage />
+                </PublicRoute>
+              }
+            />
+            <Route
+              path="/register"
+              element={
+                <PublicRoute restricted>
+                  <RegisterPage />
+                </PublicRoute>
+              }
+            />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        )}
       </Suspense>
       <Toaster position="top-right" reverseOrder={false} />
     </ThemeProvider>
