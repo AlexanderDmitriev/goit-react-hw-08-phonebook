@@ -3,25 +3,13 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 
 axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
-const token = {
-  set(token) {
-    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-  },
-  unset() {
-    axios.defaults.headers.common.Authorization = ``;
-  },
-};
 
  const getContacts = createAsyncThunk(
   'contacts/getContacts',
-  async (_, thunkAPI) => {
-    const currentToken = thunkAPI.getState().authification.token;
-    if (currentToken === null) {
-      return thunkAPI.rejectWithValue() ;
-    }
-    token.set(currentToken);
+  async () => {
     try {
       const { data } = await axios.get('/contacts');
+      console.log(data);
       return data;
     } catch (error) {
       /* toast.error(`Something wrong. We have no user data.`); */
@@ -34,7 +22,6 @@ const addNewContact = createAsyncThunk(
     async newContact => {
       try {
         const { data } = await axios.post('/contacts', newContact);
-        token.set(data.token);
         toast.success(`The adding procedure was successful`);
         return data;
       } catch (error) {
@@ -43,8 +30,22 @@ const addNewContact = createAsyncThunk(
     }
   );
 
+  const patchContact = createAsyncThunk(
+    'contacts/editContact',
+    async (contactId,newData) => {
+      try {
+        const { data } = await axios.patch(`/contacts/${contactId}`, newData);
+        toast.success(`The edit procedure was successful`);
+        return data;
+      } catch (error) {
+        toast.error(`The edit procedure was failture`);
+      }
+    }
+  );
+
 const contactsOperations = {
     getContacts,
     addNewContact,
+    patchContact,
   };
   export default contactsOperations;

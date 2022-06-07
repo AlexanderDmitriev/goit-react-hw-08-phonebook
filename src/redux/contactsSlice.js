@@ -18,12 +18,11 @@ export const contactsSlice = createSlice({
         state.name = action.payload.name;
         state.number = action.payload.number;
       },
-      /*[authOperations.logoutUser.fulfilled](state, _) {
-        state.user = { name: null, email: null };
-        state.token = null;
-        state.isLoggedIn=false;
+      [contactsOperations.patchContact.fulfilled](state, action) {
+        state.name = action.payload.name;
+        state.number = action.payload.number;
       }, 
-      [authOperations.getUserInformation.pending](state) {
+      /*[authOperations.getUserInformation.pending](state) {
         state.isFetchingUser = true;
       },
       [authOperations.getUserInformation.fulfilled](state, action) {

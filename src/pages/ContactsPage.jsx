@@ -10,7 +10,7 @@ import Button from '@mui/material/Button';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import { filterContacts } from '../redux/filter';
 /* import {phoneBookApi} from '../redux/contacts'; */
-import contactsOperations from '../redux/phoneBook'
+import contactsOperations from '../redux/phoneBook';
 
 const ContactsPage = () => {
   const dispatch = useDispatch();
@@ -18,17 +18,10 @@ const ContactsPage = () => {
   const [showAddingModal, setShowAddingModal] = useState(false);
 
   const filterContact = useSelector(state => state.filter.value);
-  /*  const [filter, setFilter] = useState(''); */
-
-  /* const { data, error, isFetching } = phoneBookApi.useGetAllContactsQuery(); */
-  const { data:contacts, /* error, isFetching */ } = dispatch(contactsOperations.getContacts());
-
-/* console.log(data); */
-
-  /* const contacts = [
-    { name: 'user1', number: 'number1' },
-    { name: 'user2', number: 'number2' },
-  ]; */
+ 
+  const { contacts /* error, isFetching */ } = dispatch(
+    contactsOperations.getContacts()
+  );
 
   const changeFilter = event => {
     dispatch(filterContacts(event.currentTarget.value));

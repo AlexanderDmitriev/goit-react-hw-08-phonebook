@@ -1,5 +1,6 @@
 import { HiOutlineEmojiSad } from 'react-icons/hi';
 import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 
 export default function NotFoundPage() {
   return (
@@ -11,7 +12,14 @@ export default function NotFoundPage() {
         p: 3,
       }}
     >
-      <h1>404 Page not found</h1>
+      <Typography
+            variant="h5"
+            component="h2"
+            color="inherit"
+            sx={{ flexGrow: 1 }}
+          >
+            404 Page not found
+          </Typography>
       <HiOutlineEmojiSad size="256px" />
     </Box>
   );
