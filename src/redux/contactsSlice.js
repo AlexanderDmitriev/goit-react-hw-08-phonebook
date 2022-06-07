@@ -2,8 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import contactsOperations from './phoneBook';
 
 const initialState = {
-    name: null,
-    number: null,
+  contacts: [],
 };
 
 export const contactsSlice = createSlice({
@@ -11,16 +10,14 @@ export const contactsSlice = createSlice({
     initialState,
     extraReducers: {
       [contactsOperations.getContacts.fulfilled](state, action) {
-        state.name = action.payload.name;
-        state.number = action.payload.number;
+        state.contacts = action.payload;
       },
        [contactsOperations.addNewContact.fulfilled](state, action) {
         state.name = action.payload.name;
         state.number = action.payload.number;
       },
       [contactsOperations.patchContact.fulfilled](state, action) {
-        state.name = action.payload.name;
-        state.number = action.payload.number;
+        state.contacts = action.payload;
       }, 
       /*[authOperations.getUserInformation.pending](state) {
         state.isFetchingUser = true;

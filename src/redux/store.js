@@ -15,7 +15,7 @@ import {contactsSlice} from './contactsSlice'
 
 export const store = configureStore({
   reducer: {
-    /* [phoneBookApi.reducerPath]: phoneBookApi.reducer, */
+    [phoneBookApi.reducerPath]: phoneBookApi.reducer,
     [authSlice.name]:persistedToken,
     [contactsSlice.name]:contactsSlice.reducer,
     [filterSlice.name]: filterSlice.reducer,

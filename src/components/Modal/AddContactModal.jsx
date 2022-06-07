@@ -39,6 +39,7 @@ const AddContactModal = ({ onClose }) => {
   const handleSubmit = event => {
     event.preventDefault();
     dispatch(contactsOperations.addNewContact({ name, number }));
+    dispatch(contactsOperations.getContacts());
     setName('');
     setNumber('');
     onClose();

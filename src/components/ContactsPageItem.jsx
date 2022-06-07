@@ -9,16 +9,22 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useState } from 'react';
 import EditContactModal from '../components/Modal/EditContactModal';
-
+import { useDispatch } from 'react-redux';
+import contactsOperations from '../redux/phoneBook';
 
 export const ContactsPageItems = ({ data }) => {
+  const dispatch = useDispatch();
   const [showEditModal, setShowEditModal] = useState(false);
+  const [currentContact, setCurrentContact] = useState('');
 
-  const toggleEditModal = () => {
+  const toggleEditModal = (e) => {
     setShowEditModal(!showEditModal);
   };
 
-  
+  const handleDelete = () => {
+    dispatch(contactsOperations.deleteContact(currentContact.id));
+    dispatch(contactsOperations.getContacts());
+  };
 
   return (
     <>
@@ -44,7 +50,7 @@ export const ContactsPageItems = ({ data }) => {
 
         <List>
           {data.map(contactItem => (
-            <ListItem disablePadding sx={{ m: 1 }}>
+            <ListItem disablePadding sx={{ m: 1 }} onFocus={()=>setCurrentContact(contactItem)} key={contactItem.id}>
               <ListItemText
                 primary={`${contactItem.name} - ${contactItem.number}`}
               />
@@ -60,13 +66,15 @@ export const ContactsPageItems = ({ data }) => {
                 variant="contained"
                 endIcon={<DeleteIcon />}
                 sx={{ ml: 1 }}
+                onClick={handleDelete}
               >
                 Delete contact
               </Button>
             </ListItem>
+           
           ))}
         </List>
-        {showEditModal && <EditContactModal onClose={toggleEditModal} />}
+        {showEditModal && <EditContactModal currentContact={currentContact} onClose={toggleEditModal} />}
       </Box>
     </>
   );

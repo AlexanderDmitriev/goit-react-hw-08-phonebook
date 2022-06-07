@@ -4,9 +4,23 @@ import toast from 'react-hot-toast';
 
 axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
 
+const token = {
+  set(token) {
+    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+  },
+  unset() {
+    axios.defaults.headers.common.Authorization = ``;
+  },
+};
+
  const getContacts = createAsyncThunk(
   'contacts/getContacts',
-  async () => {
+  async (_, thunkAPI) => {
+    const currentToken = thunkAPI.getState().authification.token;
+    if (currentToken === null) {
+      return thunkAPI.rejectWithValue();
+    }
+    token.set(currentToken);
     try {
       const { data } = await axios.get('/contacts');
       console.log(data);
@@ -43,9 +57,22 @@ const addNewContact = createAsyncThunk(
     }
   );
 
+  const deleteContact = createAsyncThunk(
+    'contacts/deleteContact',
+    async (contactId) => {
+      try {
+        await axios.delete(`/contacts/${contactId}`);
+        toast.success(`The delete procedure was successful`);
+      } catch (error) {
+        toast.error(`The delete procedure was failture`);
+      }
+    }
+  );
+
 const contactsOperations = {
     getContacts,
     addNewContact,
     patchContact,
+    deleteContact
   };
   export default contactsOperations;

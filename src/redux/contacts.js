@@ -6,7 +6,8 @@ export const phoneBookApi = createApi({
     baseUrl: 'https://connections-api.herokuapp.com',
   }),
   prepareHeaders: (headers, { getState }) => {
-    const token = getState().authification.token
+    const token = getState().auth.token
+    console.log(getState());
 
     // If we have a token set in state, let's assume that we should be passing it.
     if (token) {
@@ -22,6 +23,7 @@ export const phoneBookApi = createApi({
         url: `/contacts`,
         method: 'GET'
       }),
+      keepUnusedDataFor: 5,
       providesTags: ['Contacts'],
     }),
     addContact: builder.mutation({
