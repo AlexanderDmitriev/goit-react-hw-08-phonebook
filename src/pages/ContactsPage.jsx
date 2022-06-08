@@ -1,16 +1,15 @@
 import Typography from '@mui/material/Typography';
-import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { ContactsPageItems } from '../components/ContactsPageItem';
 import AddContactModal from '../components/Modal/AddContactModal';
-import { FilterContainer } from '../components/Filter/FilterContainer';
 import Button from '@mui/material/Button';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import { filterContacts } from '../redux/filter';
 /* import { phoneBookApi } from '../redux/contacts';*/
 import contactsOperations from '../redux/phoneBook'; 
+import {FilterSection} from '../components/Filter/FilterSection'
 
 const ContactsPage = () => {
   const dispatch = useDispatch();
@@ -19,13 +18,10 @@ const ContactsPage = () => {
   
   useEffect(() => {
     dispatch(contactsOperations.getContacts());
-    console.log(contacts);
   },[dispatch]);
   //const contacts = useSelector(state => state.contacts.contacts);
-   const isFetching = useSelector(state => state.isFetching);
 
    //Проверка пришли ли данные с сервера
-  const showContacts = contacts && !isFetching;
   const [showAddingModal, setShowAddingModal] = useState(false);
 
   const filterContact = useSelector(state => state.filter.value);
@@ -70,35 +66,7 @@ const ContactsPage = () => {
       >
         Add new contact
       </Button>
-      <Box
-        sx={{
-          width: '100%',
-          bgcolor: 'background.main',
-          color: 'text.primary',
-          display: 'flex',
-          justifyContent: 'flex-start',
-          flexDirection: 'row',
-        }}
-      >
-        <FilterContainer>
-          <Typography
-            variant="h6"
-            component="h2"
-            color="inherit"
-            sx={{ flexGrow: 1 }}
-          >
-            Filter
-          </Typography>
-          <TextField
-            id="filter"
-            variant="outlined"
-            size="small"
-            sx={{ ml: 3 }}
-            onChange={changeFilter}
-          />
-        </FilterContainer>
-      </Box>
-
+      <FilterSection changeFilter={changeFilter}/>
       {!contacts && (
         <Typography
           variant="h6"
