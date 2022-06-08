@@ -39,7 +39,6 @@ export const App = () => {
   }, [isDarkTheme]);
 
   const handleChangeTheme = () => {
-    console.log(loggedIn);
     setIsDarkTheme(!isDarkTheme);
   };
 

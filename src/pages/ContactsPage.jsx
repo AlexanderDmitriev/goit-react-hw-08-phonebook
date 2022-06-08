@@ -1,38 +1,31 @@
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import { useDispatch, useSelector } from 'react-redux';
-import { useState, useEffect } from 'react';
-import { ContactsPageItems } from '../components/ContactsPageItem';
-import AddContactModal from '../components/Modal/AddContactModal';
 import Button from '@mui/material/Button';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import { ContactsPageItems } from '../components/ContactsPageItem';
+import AddContactModal from '../components/Modal/AddContactModal';
+import { FilterSection } from '../components/Filter/FilterSection';
 import { filterContacts } from '../redux/filter';
-/* import { phoneBookApi } from '../redux/contacts';*/
-import contactsOperations from '../redux/phoneBook'; 
-import {FilterSection} from '../components/Filter/FilterSection'
+import contactsOperations from '../redux/phoneBook';
 
 const ContactsPage = () => {
   const dispatch = useDispatch();
-  //const [contacts, setContacts] = useState(useSelector(state => state.contacts.contacts));
   const contacts = useSelector(state => state.contacts.contacts);
-  
+
   useEffect(() => {
     dispatch(contactsOperations.getContacts());
-  },[dispatch]);
-  //const contacts = useSelector(state => state.contacts.contacts);
+  }, [dispatch]);
 
-   //Проверка пришли ли данные с сервера
+
   const [showAddingModal, setShowAddingModal] = useState(false);
 
-  const filterContact = useSelector(state => state.filter.value);
+  const toggleAddingModal = () => {
+    setShowAddingModal(!showAddingModal);
+  };
 
-  //const { data: contacts = [], error, isFetching } = phoneBookApi.useGetAllContactsQuery();
-  /*  const contacts = dispatch(contactsOperations.getContacts()).then(); */
-/*   const {
-    data: contacts = [],
-    error,
-    isFetching,
-  } = dispatch(contactsOperations.getContacts()); */
+  const filterContact = useSelector(state => state.filter.value);
 
   const changeFilter = event => {
     dispatch(filterContacts(event.currentTarget.value));
@@ -45,10 +38,6 @@ const ContactsPage = () => {
       data.name.toLowerCase().includes(normalizedFilter)
     );
   }
-
-  const toggleAddingModal = () => {
-    setShowAddingModal(!showAddingModal);
-  };
 
   return (
     <Box
@@ -66,7 +55,7 @@ const ContactsPage = () => {
       >
         Add new contact
       </Button>
-      <FilterSection changeFilter={changeFilter}/>
+      <FilterSection changeFilter={changeFilter} />
       {!contacts && (
         <Typography
           variant="h6"

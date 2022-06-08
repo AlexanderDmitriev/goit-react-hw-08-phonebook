@@ -26,7 +26,7 @@ const token = {
       console.log(data);
       return data;
     } catch (error) {
-      /* toast.error(`Something wrong. We have no user data.`); */
+      toast.error(`Something wrong. We have no user data.`);
     }
   }
 );

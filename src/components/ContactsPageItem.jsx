@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
@@ -7,9 +9,7 @@ import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { useState } from 'react';
 import EditContactModal from '../components/Modal/EditContactModal';
-import { useDispatch } from 'react-redux';
 import contactsOperations from '../redux/phoneBook';
 
 export const ContactsPageItems = ({ data }) => {

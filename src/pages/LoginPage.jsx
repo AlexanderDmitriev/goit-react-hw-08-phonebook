@@ -1,10 +1,10 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import * as yup from 'yup';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import { useDispatch } from 'react-redux';
 import authOperations from '../api/authification';
 
 const LoginPage = () => {
