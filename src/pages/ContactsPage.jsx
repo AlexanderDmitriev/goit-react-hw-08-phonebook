@@ -2,20 +2,27 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import { useDispatch, useSelector } from 'react-redux';
-import { useState, /* useEffect */ } from 'react';
+import { useState, useEffect } from 'react';
 import { ContactsPageItems } from '../components/ContactsPageItem';
 import AddContactModal from '../components/Modal/AddContactModal';
 import { FilterContainer } from '../components/FilterContainer';
 import Button from '@mui/material/Button';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import { filterContacts } from '../redux/filter';
-/* import { phoneBookApi } from '../redux/contacts';
-import contactsOperations from '../redux/phoneBook'; */
+/* import { phoneBookApi } from '../redux/contacts';*/
+import contactsOperations from '../redux/phoneBook'; 
 
 const ContactsPage = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(state => state.contacts.contacts);
-  /*  const loggedIn = useSelector(state => state.isLoggedIn); */
+  useEffect(() => {
+    dispatch(contactsOperations.getContacts());
+  },[dispatch]);
+  //const contacts = useSelector(state => state.contacts.contacts);
+   const isFetching = useSelector(state => state.isFetching);
+
+   //Проверка пришли ли данные с сервера
+  const showContacts = contacts && !isFetching;
   const [showAddingModal, setShowAddingModal] = useState(false);
 
   const filterContact = useSelector(state => state.filter.value);

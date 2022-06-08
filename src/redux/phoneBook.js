@@ -46,7 +46,7 @@ const addNewContact = createAsyncThunk(
 
   const patchContact = createAsyncThunk(
     'contacts/editContact',
-    async (contactId,newData) => {
+    async ({contactId,newData}) => {
       try {
         const { data } = await axios.patch(`/contacts/${contactId}`, newData);
         toast.success(`The edit procedure was successful`);
