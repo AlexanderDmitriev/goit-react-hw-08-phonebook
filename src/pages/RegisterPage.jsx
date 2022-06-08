@@ -1,12 +1,10 @@
 import { useState } from 'react';
-/* import { useAddNewUserMutation } from '../redux/user'; */
+import { useDispatch } from 'react-redux';
+import * as yup from 'yup';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import * as yup from 'yup';
-/* import toast from 'react-hot-toast'; */
-import { useDispatch } from 'react-redux';
 import authOperations from '../api/authification';
 
 const RegisterPage = () => {
@@ -16,15 +14,10 @@ const RegisterPage = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  /* const [createNewUser, isSuccess] = useAddNewUserMutation(); */
 
   const handleSubmit = event => {
     event.preventDefault();
-    dispatch(authOperations.addNewUser({ name,email, password }));
-    /* createNewUser({ name, email, password }); */
-   /*  if (isSuccess) {
-      toast.success(`The registration procedure was successful`);
-    } */
+    dispatch(authOperations.addNewUser({ name, email, password }));
     setName('');
     setEmail('');
     setPassword('');
@@ -62,24 +55,24 @@ const RegisterPage = () => {
         id="name"
         label="Enter your name"
         variant="standard"
-        sx={{ m:2}}
+        sx={{ m: 2 }}
         onChange={e => setName(e.target.value)}
       />
       <TextField
         id="email"
         label="Enter your email"
         variant="standard"
-        sx={{ m:2}}
+        sx={{ m: 2 }}
         onChange={e => setEmail(e.target.value)}
       />
       <TextField
         id="password"
         label="Enter your password"
         variant="standard"
-        sx={{ m:2}}
+        sx={{ m: 2 }}
         onChange={e => setPassword(e.target.value)}
       />
-      <Button variant="contained" size="medium" type="submit" sx={{ m:2}}>
+      <Button variant="contained" size="medium" type="submit" sx={{ m: 2 }}>
         Submit
       </Button>
     </Box>

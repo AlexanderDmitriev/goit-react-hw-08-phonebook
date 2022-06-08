@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { ContactsPageItems } from '../components/ContactsPageItem';
 import AddContactModal from '../components/Modal/AddContactModal';
-import { FilterContainer } from '../components/FilterContainer';
+import { FilterContainer } from '../components/Filter/FilterContainer';
 import Button from '@mui/material/Button';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import { filterContacts } from '../redux/filter';

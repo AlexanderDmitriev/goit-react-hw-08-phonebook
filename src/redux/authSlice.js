@@ -54,5 +54,4 @@ const persistConfig = {
 
 export const persistedToken = persistReducer(persistConfig, authSlice.reducer);
 
-/* export const {token} = authSlice.reducer; */
 

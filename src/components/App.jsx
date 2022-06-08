@@ -1,13 +1,11 @@
+import { useState, useEffect, lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import { lazy, Suspense } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Toaster } from 'react-hot-toast';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { dark, light } from '../theme';
-import { useSelector } from 'react-redux';
-import { Toaster } from 'react-hot-toast';
 import { PublicRoute } from './PublicRoute';
 import { PrivateRoute } from './PrivateRoute';
-import { useDispatch } from 'react-redux';
 import authOperations from '../api/authification';
 import contactsOperations from '../redux/phoneBook';
 
@@ -20,22 +18,25 @@ const NotFoundPage = lazy(() => import('../pages/NotFoundPage'));
 
 export const App = () => {
   const dispatch = useDispatch();
+
   const loggedIn = useSelector(state => state.authification.isLoggedIn);
   const isFetchingUser = useSelector(
     state => state.authification.isFetchingUser
   );
+
+  useEffect(() => {
+    dispatch(authOperations.getUserInformation());
+    dispatch(contactsOperations.getContacts());
+  }, [dispatch]);
+
   ///Theming
   const [isDarkTheme, setIsDarkTheme] = useState(
     JSON.parse(window.localStorage.getItem('darkTheme')) ?? false
   );
 
   useEffect(() => {
-    dispatch(authOperations.getUserInformation());
-  }, [dispatch]);
-
-  useEffect(() => {
-    dispatch(contactsOperations.getContacts());
-  }, [dispatch]);
+    window.localStorage.setItem('darkTheme', JSON.stringify(isDarkTheme));
+  }, [isDarkTheme]);
 
   const handleChangeTheme = () => {
     console.log(loggedIn);
@@ -46,10 +47,6 @@ export const App = () => {
   const handleLogout = () => {
     dispatch(authOperations.logoutUser());
   };
-
-  useEffect(() => {
-    window.localStorage.setItem('darkTheme', JSON.stringify(isDarkTheme));
-  }, [isDarkTheme]);
 
   return (
     <ThemeProvider theme={isDarkTheme ? createTheme(dark) : createTheme(light)}>
