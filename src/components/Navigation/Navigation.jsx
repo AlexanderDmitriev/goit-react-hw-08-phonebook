@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -9,17 +10,14 @@ import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import { Link } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
-import authOperations from '../../api/authification';
 
-const Navigation = ({ isDark = false, changeTheme }) => {
-  const dispatch = useDispatch();
-  const loggedIn = useSelector(state => state.authification.isLoggedIn);
+const Navigation = ({
+  isDark = false,
+  changeTheme,
+  loggedIn,
+  handleLogout,
+}) => {
   const userName = useSelector(state => state.authification.user.name);
-  const startNav=loggedIn?'/contacts':'/';
-
-  const handleLogout = () => {dispatch(authOperations.logoutUser())};
 
   return (
     <>
@@ -28,7 +26,7 @@ const Navigation = ({ isDark = false, changeTheme }) => {
           <Toolbar>
             <Link
               component={RouterLink}
-              to={startNav}
+              to={loggedIn ? '/contacts' : '/'}
               color="secondary"
               variant="h3"
               underline="none"
@@ -37,18 +35,7 @@ const Navigation = ({ isDark = false, changeTheme }) => {
               My contacts
             </Link>
 
-            {!loggedIn && (
-              <>
-                <Button component={RouterLink} to="/register" color="inherit">
-                  Registration
-                </Button>
-                <Button component={RouterLink} to="/login" color="inherit">
-                  Login
-                </Button>
-              </>
-            )}
-
-            {loggedIn && (
+            {loggedIn ? (
               <>
                 <Typography
                   variant="subtitle1"
@@ -58,7 +45,18 @@ const Navigation = ({ isDark = false, changeTheme }) => {
                 >
                   Hello, {userName}
                 </Typography>
-                <Button color="inherit" onClick={handleLogout}>Logout</Button>
+                <Button color="inherit" onClick={handleLogout}>
+                  Logout
+                </Button>
+              </>
+            ) : (
+              <>
+                <Button component={RouterLink} to="/register" color="inherit">
+                  Registration
+                </Button>
+                <Button component={RouterLink} to="/login" color="inherit">
+                  Login
+                </Button>
               </>
             )}
 
@@ -74,6 +72,7 @@ const Navigation = ({ isDark = false, changeTheme }) => {
             >
               {isDark ? <LightModeIcon /> : <DarkModeIcon />}
             </IconButton>
+            
           </Toolbar>
         </AppBar>
       </Box>

@@ -11,7 +11,6 @@ export const contactsSlice = createSlice({
     initialState,
     extraReducers: {
       [contactsOperations.getContacts.pending](state, action) {
-        state.contacts = action.payload;
         state.isFetching=true;
       },
       [contactsOperations.getContacts.fulfilled](state, action) {

@@ -14,9 +14,12 @@ import contactsOperations from '../redux/phoneBook';
 
 const ContactsPage = () => {
   const dispatch = useDispatch();
+  //const [contacts, setContacts] = useState(useSelector(state => state.contacts.contacts));
   const contacts = useSelector(state => state.contacts.contacts);
+  
   useEffect(() => {
     dispatch(contactsOperations.getContacts());
+    console.log(contacts);
   },[dispatch]);
   //const contacts = useSelector(state => state.contacts.contacts);
    const isFetching = useSelector(state => state.isFetching);

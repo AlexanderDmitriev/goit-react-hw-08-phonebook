@@ -42,6 +42,11 @@ export const App = () => {
     setIsDarkTheme(!isDarkTheme);
   };
 
+  //Logout
+  const handleLogout = () => {
+    dispatch(authOperations.logoutUser());
+  };
+
   useEffect(() => {
     window.localStorage.setItem('darkTheme', JSON.stringify(isDarkTheme));
   }, [isDarkTheme]);
@@ -49,7 +54,12 @@ export const App = () => {
   return (
     <ThemeProvider theme={isDarkTheme ? createTheme(dark) : createTheme(light)}>
       <Suspense fallback={<div>Loading...</div>}>
-        <Navigation isDark={isDarkTheme} changeTheme={handleChangeTheme} />
+        <Navigation
+          isDark={isDarkTheme}
+          changeTheme={handleChangeTheme}
+          loggedIn={loggedIn}
+          handleLogout={handleLogout}
+        />
         {!isFetchingUser && (
           <Routes>
             <Route
