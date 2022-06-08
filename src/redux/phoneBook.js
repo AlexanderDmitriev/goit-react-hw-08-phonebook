@@ -23,7 +23,6 @@ const token = {
     token.set(currentToken);
     try {
       const { data } = await axios.get('/contacts');
-      console.log(data);
       return data;
     } catch (error) {
       toast.error(`Something wrong. We have no user data.`);

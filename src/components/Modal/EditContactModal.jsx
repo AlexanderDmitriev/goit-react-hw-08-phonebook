@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { Overlay, Modal } from './ModalStyled';
 import { useDispatch } from 'react-redux';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
+import { Overlay, Modal } from './ModalStyled';
 import contactsOperations from '../../redux/phoneBook';
 
 //Делаем портал для рендера модалки
