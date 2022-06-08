@@ -38,7 +38,11 @@ const EditContactModal = ({ currentContact, onClose }) => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    dispatch(contactsOperations.patchContact(currentContact.id,{ name, number }));
+    console.log(name);
+    console.log(number);
+    const newData = {name:name, number:number}
+    console.log(newData);
+    dispatch(contactsOperations.patchContact(currentContact.id,newData));
     dispatch(contactsOperations.getContacts());
     setName('');
     setNumber('');
