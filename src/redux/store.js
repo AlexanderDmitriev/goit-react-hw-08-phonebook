@@ -11,9 +11,11 @@ import {
   REGISTER,
 } from 'redux-persist';
 import {contactsSlice} from './contactsSlice'
+import { phoneBookApi } from './phoneBookRTK';
 
 export const store = configureStore({
   reducer: {
+    [phoneBookApi.reducerPath]: phoneBookApi.reducer,
     [authSlice.name]:persistedToken,
     [contactsSlice.name]:contactsSlice.reducer,
     [filterSlice.name]: filterSlice.reducer,
@@ -24,6 +26,7 @@ export const store = configureStore({
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     }),
+    phoneBookApi.middleware,
   ],
 });
 

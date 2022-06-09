@@ -57,6 +57,7 @@ const LoginPage = () => {
       />
       <TextField
         id="password"
+        type="password"
         label="Enter your password"
         variant="standard"
         sx={{ m:2}}

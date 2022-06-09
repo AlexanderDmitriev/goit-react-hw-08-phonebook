@@ -11,19 +11,22 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditContactModal from '../components/Modal/EditContactModal';
 import contactsOperations from '../redux/phoneBook';
+import {phoneBookApi} from '../redux/phoneBookRTK';
 
 export const ContactsPageItems = ({ data }) => {
   const dispatch = useDispatch();
   const [showEditModal, setShowEditModal] = useState(false);
   const [currentContact, setCurrentContact] = useState('');
+  const [deleteContact] = phoneBookApi.useDeleteContactMutation();
 
   const toggleEditModal = (e) => {
     setShowEditModal(!showEditModal);
   };
 
   const handleDelete = () => {
-    dispatch(contactsOperations.deleteContact(currentContact.id));
-    dispatch(contactsOperations.getContacts());
+    deleteContact(currentContact.id);
+    /* dispatch(contactsOperations.deleteContact(currentContact.id));
+    dispatch(contactsOperations.getContacts()); */
   };
 
   return (

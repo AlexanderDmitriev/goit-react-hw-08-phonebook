@@ -6,6 +6,7 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import { Overlay, Modal } from './ModalStyled';
 import contactsOperations from '../../redux/phoneBook';
+import {phoneBookApi} from '../../redux/phoneBookRTK';
 
 //Делаем портал для рендера модалки
 const modalRoot = document.querySelector('#modal-root');
@@ -14,6 +15,8 @@ const AddContactModal = ({ onClose }) => {
   const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
+
+  const [createContact, isSuccess] = phoneBookApi.useAddContactMutation();
 
     //Вешаем/снимаем слушатель событий при нажатии клавиши Escape
   const handleEsc = event => {
@@ -38,6 +41,7 @@ const AddContactModal = ({ onClose }) => {
   //При сабмите формы отправляем новый контакт на бек
   const handleSubmit = event => {
     event.preventDefault();
+    //createContact({ name, number });
     dispatch(contactsOperations.addNewContact({ name, number }));
     dispatch(contactsOperations.getContacts());
     setName('');
