@@ -7,10 +7,10 @@ export const phoneBookApi = createApi({
   }),
   prepareHeaders: (headers, { getState }) => {
     const token = getState().authification.token
-
-    // If we have a token set in state, let's assume that we should be passing it.
+    console.log(token);
     if (token) {
-      headers.set('authorization', `Bearer ${token}`)
+      headers.set('Authorization', `Bearer ${token}`)
+      
     }
 
     return headers
@@ -38,7 +38,7 @@ export const phoneBookApi = createApi({
       invalidatesTags: ['Contacts'],
     }),
     deleteContact: builder.mutation({
-      query: ({ contactId }) => ({
+      query:  contactId  => ({
         url: `/contacts/${contactId}`,
         method: 'DELETE',
       }),
