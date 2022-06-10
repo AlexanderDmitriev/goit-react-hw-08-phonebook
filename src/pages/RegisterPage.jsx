@@ -60,7 +60,6 @@ const RegisterPage = () => {
       />
       <TextField
         id="email"
-        type="password"
         label="Enter your email"
         variant="standard"
         sx={{ m: 2 }}
@@ -68,6 +67,7 @@ const RegisterPage = () => {
       />
       <TextField
         id="password"
+        type="password"
         label="Enter your password"
         variant="standard"
         sx={{ m: 2 }}

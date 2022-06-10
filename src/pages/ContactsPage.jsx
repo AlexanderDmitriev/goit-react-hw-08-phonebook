@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
@@ -8,20 +8,11 @@ import { ContactsPageItems } from '../components/ContactsPageItem';
 import AddContactModal from '../components/Modal/AddContactModal';
 import { FilterSection } from '../components/Filter/FilterSection';
 import { filterContacts } from '../redux/filter';
-import contactsOperations from '../redux/phoneBook';
 import {phoneBookApi} from '../redux/phoneBookRTK';
 
 const ContactsPage = () => {
   const dispatch = useDispatch();
-  //const contacts = useSelector(state => state.contacts.contacts);
-  const { data: contacts, error, isFetching } = phoneBookApi.useGetAllContactsQuery();
-
-  useEffect(() => {
-    //dispatch(contactsOperations.getContacts());
-    //const { data: contacts, error, isFetching } = phoneBookApi.useGetAllContactsQuery();
-  }, [dispatch]);
-
-
+  const { data: contacts} = phoneBookApi.useGetAllContactsQuery();
   const [showAddingModal, setShowAddingModal] = useState(false);
 
   const toggleAddingModal = () => {

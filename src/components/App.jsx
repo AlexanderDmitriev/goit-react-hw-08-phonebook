@@ -7,7 +7,6 @@ import { dark, light } from '../theme';
 import { PublicRoute } from './PublicRoute';
 import { PrivateRoute } from './PrivateRoute';
 import authOperations from '../api/authification';
-import contactsOperations from '../redux/phoneBook';
 
 const Navigation = lazy(() => import('./Navigation/Navigation'));
 const StartPage = lazy(() => import('../pages/StartPage'));
@@ -26,7 +25,6 @@ export const App = () => {
 
   useEffect(() => {
     dispatch(authOperations.getUserInformation());
-    dispatch(contactsOperations.getContacts());
   }, [dispatch]);
 
   ///Theming

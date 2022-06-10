@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
@@ -10,11 +9,9 @@ import Divider from '@mui/material/Divider';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditContactModal from '../components/Modal/EditContactModal';
-import contactsOperations from '../redux/phoneBook';
 import {phoneBookApi} from '../redux/phoneBookRTK';
 
 export const ContactsPageItems = ({ data }) => {
-  const dispatch = useDispatch();
   const [showEditModal, setShowEditModal] = useState(false);
   const [currentContact, setCurrentContact] = useState('');
   const [deleteContact] = phoneBookApi.useDeleteContactMutation();
@@ -25,8 +22,6 @@ export const ContactsPageItems = ({ data }) => {
 
   const handleDelete = () => {
     deleteContact(currentContact.id);
-    /* dispatch(contactsOperations.deleteContact(currentContact.id));
-    dispatch(contactsOperations.getContacts()); */
   };
 
   return (
