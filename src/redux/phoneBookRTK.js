@@ -41,13 +41,12 @@ export const phoneBookApi = createApi({
       invalidatesTags: ['Contacts'],
     }),
     patchContact: builder.mutation({
-      query: ({ token, name, number, contactId }) => ({
+      query: ({ name, number, contactId }) => ({
         url: `/contacts/${contactId}`,
         method: 'PATCH',
         body: {
-          token: token,
           name: name,
-          phone: number,
+          number: number,
         },
       }),
       invalidatesTags: ['Contacts'],

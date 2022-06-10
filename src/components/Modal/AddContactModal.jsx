@@ -1,10 +1,10 @@
-import {useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import { Overlay, Modal } from './ModalStyled';
-import {phoneBookApi} from '../../redux/phoneBookRTK';
+import { phoneBookApi } from '../../redux/phoneBookRTK';
 
 //Делаем портал для рендера модалки
 const modalRoot = document.querySelector('#modal-root');
@@ -15,7 +15,7 @@ const AddContactModal = ({ onClose }) => {
 
   const [createContact] = phoneBookApi.useAddContactMutation();
 
-    //Вешаем/снимаем слушатель событий при нажатии клавиши Escape
+  //Вешаем/снимаем слушатель событий при нажатии клавиши Escape
   const handleEsc = event => {
     if (event.code === 'Escape') {
       onClose();
