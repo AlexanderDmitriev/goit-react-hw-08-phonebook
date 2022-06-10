@@ -13,11 +13,11 @@ import {phoneBookApi} from '../redux/phoneBookRTK';
 
 const ContactsPage = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(state => state.contacts.contacts);
-  //const { data: contacts, error, isFetching } = phoneBookApi.useGetAllContactsQuery();
+  //const contacts = useSelector(state => state.contacts.contacts);
+  const { data: contacts, error, isFetching } = phoneBookApi.useGetAllContactsQuery();
 
   useEffect(() => {
-    dispatch(contactsOperations.getContacts());
+    //dispatch(contactsOperations.getContacts());
     //const { data: contacts, error, isFetching } = phoneBookApi.useGetAllContactsQuery();
   }, [dispatch]);
 

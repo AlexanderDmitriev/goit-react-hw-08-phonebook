@@ -4,17 +4,14 @@ export const phoneBookApi = createApi({
   reducerPath: 'phoneBook',
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://connections-api.herokuapp.com',
+    prepareHeaders: (headers, { getState }) => {
+      const token = getState().authification.token
+      if (token) {
+        headers.set('authorization', `Bearer ${token}`)
+      }
+      return headers
+    },
   }),
-  prepareHeaders: (headers, { getState }) => {
-    const token = getState().authification.token
-    console.log(token);
-    if (token) {
-      headers.set('authorization', `Bearer ${token}`)
-      
-    }
-
-    return headers
-  },
   tagTypes: ['Contacts'],
   endpoints: builder => ({
     getAllContacts: builder.query({
@@ -26,13 +23,12 @@ export const phoneBookApi = createApi({
       providesTags: ['Contacts'],
     }),
     addContact: builder.mutation({
-      query: ({ token, name, number }) => ({
+      query: ({ name, number }) => ({
         url: `/contacts`,
         method: 'POST',
         body: {
-          token: token,
           name: name,
-          phone: number,
+          number: number,
         },
       }),
       invalidatesTags: ['Contacts'],
