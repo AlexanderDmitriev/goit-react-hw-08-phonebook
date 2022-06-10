@@ -9,13 +9,16 @@ import AddContactModal from '../components/Modal/AddContactModal';
 import { FilterSection } from '../components/Filter/FilterSection';
 import { filterContacts } from '../redux/filter';
 import contactsOperations from '../redux/phoneBook';
+import {phoneBookApi} from '../redux/phoneBookRTK';
 
 const ContactsPage = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(state => state.contacts.contacts);
+  //const { data: contacts, error, isFetching } = phoneBookApi.useGetAllContactsQuery();
 
   useEffect(() => {
     dispatch(contactsOperations.getContacts());
+    //const { data: contacts, error, isFetching } = phoneBookApi.useGetAllContactsQuery();
   }, [dispatch]);
 
 

@@ -9,7 +9,7 @@ export const phoneBookApi = createApi({
     const token = getState().authification.token
     console.log(token);
     if (token) {
-      headers.set('Authorization', `Bearer ${token}`)
+      headers.set('authorization', `Bearer ${token}`)
       
     }
 
